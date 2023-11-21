@@ -16,7 +16,7 @@ Installation instruction will be published soon
 Before you can work with the library, you must define to a system environment 
 variable the URI were is stored the public Json Web Key Set (JWKS file).
 
-This file will be requested and store **temporary** on your NodeJS API Server.
+This file will be requested and store **temporary** on your API Server.
 Your server should be able to write on _./var/credentials/auth/jwks.json_ .
 If the file does not exist, it will be created.
 
