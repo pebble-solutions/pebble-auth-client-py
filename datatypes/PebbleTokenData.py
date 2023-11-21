@@ -1,8 +1,8 @@
-from dataclasses import dataclass
+import dataclasses
 from typing import Sequence
 
 
-@dataclass
+@dataclasses.dataclass
 class PebbleTokenData:
     aud: str
     exp: int

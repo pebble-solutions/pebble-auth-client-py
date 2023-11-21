@@ -1,12 +1,12 @@
-from dataclasses import dataclass
-from models.User import User
-from models.PebbleAuthToken import PebbleAuthToken
+import dataclasses
+import models.User as UserModel
+import models.PebbleAuthToken as PebbleAuthTokenModel
 
 
-@dataclass
+@dataclasses.dataclass
 class AuthenticatedLicenceObject:
     app: str
     id: str
     tenant_id: str
-    token: PebbleAuthToken
-    user: User
+    token: PebbleAuthTokenModel.PebbleAuthToken
+    user: UserModel.User

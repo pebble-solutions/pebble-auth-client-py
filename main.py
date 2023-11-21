@@ -1,16 +1,3 @@
-# This is a sample Python script.
+from auth import auth
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+auth("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImVudGl0bGVtZW50Ijo5OTR9.eyJpc3MiOiJEaW5vQ2hpZXNhLmdpdGh1Yi5pbyIsInN1YiI6ImFudG9uaW8iLCJhdWQiOiJuYXRhbGlhIiwiaWF0IjoxNzAwNTU4MjkwLCJleHAiOjE3MDA1NTg4OTB9.YIxd3lRUTJH9u0BOXicsUdxqkQqOTJ9mvoNktO7XEYyqjOJrk6PcsolG1EV0166QPIcrAyxEtPZGF_c5Qtav4xYc8tPAO321y4cFRidj-trPgJA9FtHCqaAePaeDNIeVGtUqzPk6LHC8ZQxcumArZqadsg2nLACqztpB2SIQE0LWjXglrzuL5GDjDiu-pyWXexn9OO2lNJ_mp2NsYZFIUc4ukJgvPwWjq_5JRR0gy3TxQ4n5akYfXXqk3ergQrZO_BiEjQj4M_7Vedjx1q7BuL0rcVYunol-Ht19FknfBxyW7pt63kwiwZ0hwOxpK4PlGOExrrished07kJn6xmvyg")
