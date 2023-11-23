@@ -22,7 +22,7 @@ If your project use a requirement.txt configuration file, simply add the
 following.
 
 ```
-pebbleauthclient>=0.1.1
+pebbleauthclient>=0.1.2
 ```
 
 Then run this command on your project :
