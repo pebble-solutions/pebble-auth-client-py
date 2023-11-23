@@ -18,18 +18,23 @@ The following procedures explains the installation of the following packages :
 
 ### Solution 1 : requirement.txt configuration
 
-The best way to ensure that the correct version of all modules are correctly 
-installed for your project is to use a requirement.txt file :
+If your project use a requirement.txt configuration file, simply add the 
+following.
 
 ```
-cryptography==41.0.5
-PyJWT==2.8.0
+pebbleauthclient>=0.1.1
 ```
 
-Then run the following on your project :
+Then run this command on your project :
 
 ```Shell
 pip install -r requirements.txt
+```
+
+Or in Dockerfile :
+
+```Dockerfile
+RUN pip install -r requirements.txt
 ```
 
 ### Solution 2 : Local installation
@@ -38,7 +43,7 @@ Check python3 is properly installed on your local machine (with pip working),
 then run the following in the application directory.
 
 ```Shell
-pip install cryptography PyJWT
+pip install pebbleauthclient
 ```
 
 ### Solution 3 : Dockerfile configuration
@@ -47,7 +52,7 @@ Add the following in your Dockerfile after the initialization of docker image
 and the implementation of Python3 in the docker container :
 
 ```Dockerfile
-RUN pip install cryptography PyJWT
+RUN pip install pebbleauthclient
 ```
 
 _Dockerfile example_
@@ -59,7 +64,7 @@ install command. Your own Dockerfile should vary from this configuration.
 # syntax=docker/dockerfile:1.2
 FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y python3.9 python3.9-dev
-RUN pip install cryptography PyJWT
+RUN pip install pebbleauthclient
 COPY . .
 CMD ["python"]
 ```
@@ -106,12 +111,19 @@ https://storage.googleapis.com/pebble-public-cdn/test_auth/private_test.pem
 
 ### Authenticate with token string
 
-Content will be published soon.
+```python
+from pebbleauthclient.auth import auth
+
+try:
+    authToken = auth("---A_valid_token---")
+    
+    print(authToken)
+    print(authToken.get_user())
+    print(authToken.get_authenticated_licence())
+except Exception as e:
+    print("ERROR: " + e)
+```
 
 ### Authenticate with HTTP Authorization header
-
-This might work only if an Authorization header has been sent in the current 
-client request. Authorization header must start with _Bearer_ string followed by
-a valid JWT.
 
 Content will be published soon.
