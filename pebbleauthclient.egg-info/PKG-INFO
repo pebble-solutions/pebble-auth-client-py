@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: PebbleAuthClientPy
+Name: pebbleauthclient
 Version: 0.1.0
 Summary: Pebble client tool for authenticate user and licence management written in Python
 Author-email: Guillaume MODARD <guillaumemodard@gmail.com>
@@ -10,6 +10,8 @@ Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
+Requires-Dist: cryptography>=41.0.5
+Requires-Dist: PyJWT>=2.8.0
 
 # Pebble Authentication Client for NodeJS
 
