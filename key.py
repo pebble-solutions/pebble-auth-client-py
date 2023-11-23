@@ -39,7 +39,7 @@ def read_jwks() -> dict:
     Read the public RSA key from /var/credentials/auth/jwks.json and convert it into JWK Set
     :return: dict
     """
-    if os.path.isfile(constants.JWKS_LOCAL_PATH):
+    if not os.path.exists(constants.JWKS_LOCAL_PATH):
         if not constants.JWKS_REMOTE_URI:
             raise EmptyJWKSRemoteURIError()
         import_remote_jwks(constants.JWKS_REMOTE_URI)

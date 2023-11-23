@@ -1,8 +1,10 @@
 import jwt
+import json
 
+from errors import NotFoundJWKError, NoAlgorithmProvidedError
 from key import get_jwk_set
 from models.PebbleAuthToken import PebbleAuthToken
-from token import get_token_data_from_jwt_payload
+from token_data import get_token_data_from_jwt_payload
 
 
 def auth(token: str) -> PebbleAuthToken:
@@ -13,11 +15,32 @@ def auth(token: str) -> PebbleAuthToken:
     """
     jwks = get_jwk_set()
 
-    algorithm = jwt.get_unverified_header(token).get('alg')
+    kid = jwt.get_unverified_header(token).get('kid')
 
-    data = jwt.decode(token=token,
-                      key=jwks,
-                      algorithms=algorithm)
+    key = None
+    jwk = None
+
+    for j in jwks['keys']:
+        if j['kid'] == kid:
+            key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(j))
+            jwk = j
+            break
+
+    if not key:
+        raise NotFoundJWKError(kid)
+
+    if "alg" not in jwk:
+        raise NoAlgorithmProvidedError(kid)
+
+    data = jwt.decode(
+        jwt=token,
+        key=key,
+        algorithms=[jwk['alg']],
+        options={
+            "verify_aud": False,
+            "verify_iss": False
+        }
+    )
 
     token_data = get_token_data_from_jwt_payload(data, token)
 

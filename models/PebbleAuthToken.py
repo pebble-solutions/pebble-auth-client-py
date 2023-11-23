@@ -1,7 +1,7 @@
 from models.AuthenticatedLicence import AuthenticatedLicence
 from datatypes.PebbleTokenData import PebbleTokenData
 from models.User import User
-from token import get_licence_object_from_token_data
+from token_data import get_licence_object_from_token_data
 
 
 class PebbleAuthToken(PebbleTokenData):

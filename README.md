@@ -7,7 +7,62 @@ written in Python compatible with may python API Server.
 
 ## Installation
 
-Installation instruction will be published soon
+### Requirements
+
+The following procedures explains the installation of the following packages :
+
+- Python 3.9 or higher
+- pip (provided with Python package)
+- PyJWT (tested with version 2.8.0)
+- cryptography (tested with version 41.0.5)
+
+### Solution 1 : requirement.txt configuration
+
+The best way to ensure that the correct version of all modules are correctly 
+installed for your project is to use a requirement.txt file :
+
+```
+cryptography==41.0.5
+PyJWT==2.8.0
+```
+
+Then run the following on your project :
+
+```Shell
+pip install -r requirements.txt
+```
+
+### Solution 2 : Local installation
+
+Check python3 is properly installed on your local machine (with pip working), 
+then run the following in the application directory.
+
+```Shell
+pip install cryptography PyJWT
+```
+
+### Solution 3 : Dockerfile configuration
+
+Add the following in your Dockerfile after the initialization of docker image 
+and the implementation of Python3 in the docker container :
+
+```Dockerfile
+RUN pip install cryptography PyJWT
+```
+
+_Dockerfile example_
+
+WARNING : This is an example in order to explain when you have to run the pip
+install command. Your own Dockerfile should vary from this configuration.
+
+```Dockerfile
+# syntax=docker/dockerfile:1.2
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y python3.9 python3.9-dev
+RUN pip install cryptography PyJWT
+COPY . .
+CMD ["python"]
+```
 
 ## Usage
 
