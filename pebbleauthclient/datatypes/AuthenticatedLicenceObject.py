@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from pebbleauthclient import models as UserModel
+from pebbleauthclient.models.User import User
 
 
 @dataclass
@@ -7,4 +7,4 @@ class AuthenticatedLicenceObject:
     app: str
     id: str
     tenant_id: str
-    user: UserModel.User
+    user: User

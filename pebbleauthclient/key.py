@@ -4,8 +4,8 @@ import json
 import urllib
 import urllib.request
 
-import constants
-from errors import EmptyJWKSRemoteURIError, EmptyJWKSError
+import pebbleauthclient.constants as constants
+from pebbleauthclient.errors import EmptyJWKSRemoteURIError, EmptyJWKSError
 
 
 def get_jwk_set() -> dict:

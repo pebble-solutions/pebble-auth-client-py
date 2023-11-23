@@ -1,10 +1,10 @@
 import jwt
 import json
 
-from errors import NotFoundJWKError, NoAlgorithmProvidedError
-from key import get_jwk_set
-from models.PebbleAuthToken import PebbleAuthToken
-from token_data import get_token_data_from_jwt_payload
+from pebbleauthclient.errors import NotFoundJWKError, NoAlgorithmProvidedError
+from pebbleauthclient.key import get_jwk_set
+from pebbleauthclient.models.PebbleAuthToken import PebbleAuthToken
+from pebbleauthclient.token_data import get_token_data_from_jwt_payload
 
 
 def auth(token: str) -> PebbleAuthToken:

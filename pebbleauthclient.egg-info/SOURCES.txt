@@ -21,3 +21,4 @@ pebbleauthclient/models/User.py
 pebbleauthclient/models/__init__.py
 pebbleauthclient/test/__init__.py
 pebbleauthclient/test/main.py
+tests/test_auth.py

@@ -1,7 +1,7 @@
-from datatypes.AuthenticatedLicenceObject import AuthenticatedLicenceObject
-from datatypes.PebbleTokenData import PebbleTokenData
-from datatypes.UserObject import UserObject
-from models.User import User
+from pebbleauthclient.datatypes.AuthenticatedLicenceObject import AuthenticatedLicenceObject
+from pebbleauthclient.datatypes.PebbleTokenData import PebbleTokenData
+from pebbleauthclient.datatypes.UserObject import UserObject
+from pebbleauthclient.models.User import User
 
 
 def get_licence_object_from_token_data(token_data: PebbleTokenData) -> AuthenticatedLicenceObject:
