@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pebbleauthclient
-Version: 0.1.0
+Version: 0.1.1
 Summary: Pebble client tool for authenticate user and licence management written in Python
 Author-email: Guillaume MODARD <guillaumemodard@gmail.com>
 Project-URL: Homepage, https://github.com/pebble-solutions/pebble-auth-client-py
