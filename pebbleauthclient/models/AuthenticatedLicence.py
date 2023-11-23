@@ -1,5 +1,5 @@
-from models.User import User
-from datatypes.AuthenticatedLicenceObject import AuthenticatedLicenceObject
+from pebbleauthclient.models.User import User
+from pebbleauthclient.datatypes.AuthenticatedLicenceObject import AuthenticatedLicenceObject
 
 
 class AuthenticatedLicence(AuthenticatedLicenceObject):

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-import models.User as UserModel
+from pebbleauthclient import models as UserModel
 
 
 @dataclass

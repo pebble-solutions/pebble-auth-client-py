@@ -1,5 +1,5 @@
 from typing import Sequence
-from datatypes.UserObject import UserObject
+from pebbleauthclient.datatypes.UserObject import UserObject
 
 
 class User(UserObject):
