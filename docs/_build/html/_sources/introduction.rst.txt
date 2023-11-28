@@ -133,7 +133,8 @@ Authenticate with HTTP Authorization header
 .. note::
 
     This example shows one way to serverside authenticate a user with the Authorization
-    header.
+    header. The important thing is to communicate a dict to ``auth_from_http_headers()``
+    function with a valid Authorization key value.
 
 .. code-block::
     :caption: python source
