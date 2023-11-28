@@ -1,5 +1,6 @@
-README.md
+README.rst
 pyproject.toml
+docs/introduction.rst
 pebbleauthclient/__init__.py
 pebbleauthclient/auth.py
 pebbleauthclient/constants.py
@@ -19,6 +20,4 @@ pebbleauthclient/models/AuthenticatedLicence.py
 pebbleauthclient/models/PebbleAuthToken.py
 pebbleauthclient/models/User.py
 pebbleauthclient/models/__init__.py
-pebbleauthclient/test/__init__.py
-pebbleauthclient/test/main.py
 tests/test_auth.py
