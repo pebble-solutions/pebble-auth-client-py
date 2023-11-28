@@ -131,7 +131,7 @@ Authenticate with HTTP Authorization header
     header. The important thing is to communicate a dict to ``auth_from_http_headers()``
     function with a valid Authorization key value.
 
-python::
+.. code:: python
 
     from http.server import HTTPServer, BaseHTTPRequestHandler
     from pebbleauthclient.auth import auth_from_http_headers
