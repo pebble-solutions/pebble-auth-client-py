@@ -1,5 +1,5 @@
-from pebbleauthclient.models.AuthenticatedLicence import AuthenticatedLicence
-from pebbleauthclient.datatypes.PebbleTokenData import PebbleTokenData
+from pebbleauthclient.models import AuthenticatedLicence
+from pebbleauthclient.datatypes import PebbleTokenData
 from pebbleauthclient.models.User import User
 from pebbleauthclient.token_data import get_licence_object_from_token_data
 
@@ -19,8 +19,18 @@ class PebbleAuthToken(PebbleTokenData):
         self.token = token_data.token
 
     def get_authenticated_licence(self) -> AuthenticatedLicence:
+        """
+        Get the authenticated licence object described by the token
+
+        :return: AuthenticatedLicence
+        """
         licence = AuthenticatedLicence(get_licence_object_from_token_data(self))
         return licence
 
     def get_user(self) -> User:
+        """
+        Get the user who own the token
+
+        :return: User
+        """
         return self.get_authenticated_licence().get_user()

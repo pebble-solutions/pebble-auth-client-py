@@ -9,6 +9,11 @@ from pebbleauthclient.errors import EmptyJWKSRemoteURIError, EmptyJWKSError
 
 
 def get_jwk_set() -> dict:
+    """
+    Return all the JWK currently stored in jwks.json file or in the process memory.
+
+    :return: dict
+    """
     if not os.getenv('PBL_AUTH_JWKS'):
         print("NOTICE: Store JWKS in process environment variable")
         os.environ['PBL_AUTH_JWKS'] = json.dumps(read_jwks())
@@ -18,6 +23,7 @@ def get_jwk_set() -> dict:
 def import_remote_jwks(remote_location: str) -> None:
     """
     Import the public RSA key from a remote server to the local /var/credentials/auth/jwks.json file.
+
     :param remote_location: str
     :return: None
     """
@@ -37,6 +43,7 @@ def import_remote_jwks(remote_location: str) -> None:
 def read_jwks() -> dict:
     """
     Read the public RSA key from /var/credentials/auth/jwks.json and convert it into JWK Set
+
     :return: dict
     """
     if not os.path.exists(constants.JWKS_LOCAL_PATH):
