@@ -26,8 +26,7 @@ Solution 1 : requirement.txt configuration
 If your project use a requirement.txt configuration file, simply add the
 following.
 
-.. code-block::
-   :caption: requirement.txt file addition
+requirement.txt file addition::
 
     pebbleauthclient>=0.1.2
 
@@ -39,8 +38,7 @@ Then run this command on your project :
 
 Or in Dockerfile :
 
-.. code-block::
-   :caption: Dockerfile addition
+Dockerfile addition::
 
     RUN pip install -r requirements.txt
 
@@ -56,8 +54,7 @@ then run the following in the application directory.
 
 Or in Dockerfile :
 
-.. code-block::
-   :caption: Dockerfile addition
+Dockerfile addition::
 
     RUN pip install pebbleauthclient
 
@@ -88,8 +85,7 @@ your terminal before starting your server :**
 **If you start your server within a Docker container, you should add this
 line to your Dockefile :**
 
-.. code-block::
-   :caption: Dockerfile
+Dockerfile::
 
     ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 
@@ -113,8 +109,7 @@ https://storage.googleapis.com/pebble-public-cdn/test_auth/private_test.pem
 Authenticate with token string
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block::
-   :caption: python source
+python source::
 
     from pebbleauthclient.auth import auth
 
@@ -136,8 +131,7 @@ Authenticate with HTTP Authorization header
     header. The important thing is to communicate a dict to ``auth_from_http_headers()``
     function with a valid Authorization key value.
 
-.. code-block::
-    :caption: python source
+python::
 
     from http.server import HTTPServer, BaseHTTPRequestHandler
     from pebbleauthclient.auth import auth_from_http_headers
