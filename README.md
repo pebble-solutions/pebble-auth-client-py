@@ -1,4 +1,4 @@
-# Pebble Authentication Client for NodeJS
+# Pebble Authentication Client for Python
 
 ## Introduction
 
