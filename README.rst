@@ -38,7 +38,7 @@ Then run this command on your project :
 
 Or in Dockerfile :
 
-Dockerfile addition::
+.. code:: Dockerfile
 
     RUN pip install -r requirements.txt
 
@@ -54,7 +54,7 @@ then run the following in the application directory.
 
 Or in Dockerfile :
 
-Dockerfile addition::
+.. code:: Dockerfile
 
     RUN pip install pebbleauthclient
 
@@ -85,7 +85,7 @@ your terminal before starting your server :**
 **If you start your server within a Docker container, you should add this
 line to your Dockefile :**
 
-Dockerfile::
+.. code:: Dockerfile
 
     ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 
@@ -109,7 +109,7 @@ https://storage.googleapis.com/pebble-public-cdn/test_auth/private_test.pem
 Authenticate with token string
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-python source::
+.. code:: python
 
     from pebbleauthclient.auth import auth
 
