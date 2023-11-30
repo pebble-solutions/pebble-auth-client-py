@@ -4,6 +4,12 @@ from pebbleauthclient.datatypes import AuthenticatedLicenceObject
 
 class AuthenticatedLicence(AuthenticatedLicenceObject):
 
+    """
+    This object represent information stored in a licence owned by a user.
+
+    :param token_object: AuthenticatedLicenceObject
+    """
+
     def __init__(self, token_object: AuthenticatedLicenceObject):
         self.app: str = token_object.app
         self.id: str = token_object.id

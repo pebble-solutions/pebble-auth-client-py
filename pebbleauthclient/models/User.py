@@ -5,11 +5,10 @@ from pebbleauthclient.datatypes import UserObject
 class User(UserObject):
     """
     This object represent an authenticated user.
+
+    :param user: UserObject
     """
     def __init__(self, user: UserObject):
-        """
-        :param user: UserObject
-        """
 
         self.username: str = user.username
         """User name (should be an email)"""

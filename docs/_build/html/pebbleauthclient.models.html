@@ -204,6 +204,12 @@
 <dt class="sig sig-object py" id="pebbleauthclient.models.AuthenticatedLicence">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pebbleauthclient.models.</span></span><span class="sig-name descname"><span class="pre">AuthenticatedLicence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.AuthenticatedLicenceObject" title="pebbleauthclient.datatypes.AuthenticatedLicenceObject.AuthenticatedLicenceObject"><span class="pre">AuthenticatedLicenceObject</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pebbleauthclient/models/AuthenticatedLicence.html#AuthenticatedLicence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.models.AuthenticatedLicence" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.AuthenticatedLicenceObject" title="pebbleauthclient.datatypes.AuthenticatedLicenceObject.AuthenticatedLicenceObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticatedLicenceObject</span></code></a></p>
+<p>This object represent information stored in a licence owned by a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token_object</strong> – AuthenticatedLicenceObject</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.AuthenticatedLicence.app">
 <span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.AuthenticatedLicence.app" title="Link to this definition">#</a></dt>
@@ -245,6 +251,12 @@
 <dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pebbleauthclient.models.</span></span><span class="sig-name descname"><span class="pre">PebbleAuthToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.PebbleTokenData" title="pebbleauthclient.datatypes.PebbleTokenData.PebbleTokenData"><span class="pre">PebbleTokenData</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pebbleauthclient/models/PebbleAuthToken.html#PebbleAuthToken"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.PebbleTokenData" title="pebbleauthclient.datatypes.PebbleTokenData.PebbleTokenData"><code class="xref py py-class docutils literal notranslate"><span class="pre">PebbleTokenData</span></code></a></p>
+<p>This object represent all the information in a token provided by a Pebble licence server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token_data</strong> – PebbleTokenData</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.aud">
 <span class="sig-name descname"><span class="pre">aud</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.aud" title="Link to this definition">#</a></dt>
@@ -334,6 +346,11 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pebbleauthclient.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.UserObject" title="pebbleauthclient.datatypes.UserObject.UserObject"><span class="pre">UserObject</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pebbleauthclient/models/User.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.models.User" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.UserObject" title="pebbleauthclient.datatypes.UserObject.UserObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserObject</span></code></a></p>
 <p>This object represent an authenticated user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> – UserObject</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.User.display_name">
 <span class="sig-name descname"><span class="pre">display_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.User.display_name" title="Link to this definition">#</a></dt>

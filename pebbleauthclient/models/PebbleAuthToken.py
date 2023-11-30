@@ -6,6 +6,12 @@ from pebbleauthclient.token_data import get_licence_object_from_token_data
 
 class PebbleAuthToken(PebbleTokenData):
 
+    """
+    This object represent all the information in a token provided by a Pebble licence server.
+
+    :param token_data: PebbleTokenData
+    """
+
     def __init__(self, token_data: PebbleTokenData):
         self.aud = token_data.aud
         self.exp = token_data.exp

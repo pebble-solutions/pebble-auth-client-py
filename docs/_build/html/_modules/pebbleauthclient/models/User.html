@@ -204,11 +204,10 @@
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">UserObject</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This object represent an authenticated user.</span>
+
+<span class="sd">    :param user: UserObject</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserObject</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param user: UserObject</span>
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;User name (should be an email)&quot;&quot;&quot;</span>
