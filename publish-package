@@ -1,0 +1,12 @@
+#!/bin/bash
+
+read -p "Before publish package, did you increase version number in pyproject.toml ? (y/n) " yn
+
+case $yn in
+  [yY] ) echo "Publishing package to pypi..."
+    python -m build
+    twine upload dist/*
+    exit;;
+  * ) echo "Abort. Suggestion : increase the version number in pyproject.toml and then retry."
+    exit;;
+esac
