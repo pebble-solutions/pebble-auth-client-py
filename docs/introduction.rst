@@ -29,7 +29,7 @@ following.
 .. code-block::
    :caption: requirement.txt file addition
 
-    pebbleauthclient>=0.1.2
+    pebbleauthclient>=0.1.5
 
 Then run this command on your project :
 
