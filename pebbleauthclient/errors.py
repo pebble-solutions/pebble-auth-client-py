@@ -13,6 +13,7 @@ class EmptyJWKSRemoteURIError(Exception):
 
         ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
     """
+
     def __init__(self):
         message = ("The public JWK Set URI is empty. It can be due to a misconfiguration on your server. Did you "
                    "export PBL_JWKS_REMOTE_URI environment variable on your system or on your .env file ?")
@@ -24,6 +25,7 @@ class EmptyJWKSError(Exception):
     """
     This error should be raised when the JWK set is empty. jwks.json might be corrupted, empty or not exists.
     """
+
     def __init__(self):
         message = "Public keys set is empty. jwks.json file might be corrupted, empty or not exist."
         super().__init__(message)
@@ -35,6 +37,7 @@ class NotFoundJWKError(Exception):
 
     :param kid: key id that cause the error
     """
+
     def __init__(self, kid: str):
         message = "JWK key was not found for this kid (" + kid + ")"
         super().__init__(message)
@@ -46,6 +49,7 @@ class NoAlgorithmProvidedError(Exception):
 
     :param kid: key id that cause the error
     """
+
     def __init__(self, kid: str):
         message = "No algorithm is provided for this JWK (" + kid + ("). It might be cause by a badly encoded of the "
                                                                      "public Json Web Key (JWK).")
@@ -56,6 +60,19 @@ class EmptyTokenError(Exception):
     """
     This error should be raised when the token is not provided or empty.
     """
+
     def __init__(self):
         message = "Empty token."
+        super().__init__(message)
+
+
+class KidNotProvidedException(Exception):
+    """
+    This error should be raised when the JWT does not have the kid claim on its header. The kid is mandatory to
+    identify which key must be used from the Key Set.
+    """
+
+    def __init__(self):
+        message = ("kid claim is not provided by the token. The kid is mandatory to identify which key must be used "
+                   "from the key set.")
         super().__init__(message)

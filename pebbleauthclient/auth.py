@@ -1,8 +1,8 @@
 import jwt
 import json
 
-from pebbleauthclient.errors import NotFoundJWKError, NoAlgorithmProvidedError, EmptyTokenError
-from pebbleauthclient.key import get_jwk_set
+from pebbleauthclient.errors import NotFoundJWKError, NoAlgorithmProvidedError, EmptyTokenError, KidNotProvidedException
+from pebbleauthclient.key import get_jwk_set, get_jwk_by_id, reset_jwk_set
 from pebbleauthclient.models import PebbleAuthToken
 from pebbleauthclient.token_data import get_token_data_from_jwt_payload
 
@@ -15,23 +15,28 @@ def auth(token: str) -> PebbleAuthToken:
     :return: PebbleAuthToken
     """
     jwks = get_jwk_set()
-
     kid = jwt.get_unverified_header(token).get('kid')
 
-    key = None
-    jwk = None
+    if not kid:
+        raise KidNotProvidedException
 
-    for j in jwks['keys']:
-        if j['kid'] == kid:
-            key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(j))
-            jwk = j
-            break
+    jwk = get_jwk_by_id(kid, jwks)
 
-    if not key:
+    # In the case that no jwk has been found for this kid, we should re-check the remote server for new keys.
+    if not jwk:
+        reset_jwk_set()
+
+        jwks = get_jwk_set()
+        jwk = get_jwk_by_id(kid, jwks)
+
+    # After re-check the remote server, if no jwk has been found for the kid, it is not possible de decode the JWT
+    if not jwk:
         raise NotFoundJWKError(kid)
 
     if "alg" not in jwk:
         raise NoAlgorithmProvidedError(kid)
+
+    key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(jwk))
 
     data = jwt.decode(
         jwt=token,

@@ -1,8 +1,10 @@
 import os.path
 import json
+import time
 
 import urllib
 import urllib.request
+from typing import Optional
 
 import pebbleauthclient.constants as constants
 from pebbleauthclient.errors import EmptyJWKSRemoteURIError, EmptyJWKSError
@@ -14,9 +16,14 @@ def get_jwk_set() -> dict:
 
     :return: dict
     """
+
+    if local_jwks_expired():
+        reset_jwk_set()
+
     if not os.getenv('PBL_AUTH_JWKS'):
         print("NOTICE: Store JWKS in process environment variable")
         os.environ['PBL_AUTH_JWKS'] = json.dumps(read_jwks())
+        os.environ['PBL_JWKS_LAST_UPDATE'] = str(time.time())
     return json.loads(os.getenv('PBL_AUTH_JWKS'))
 
 
@@ -58,3 +65,51 @@ def read_jwks() -> dict:
         raise EmptyJWKSError()
 
     return json.loads(data)
+
+
+def reset_jwk_set() -> None:
+    """
+    Remove jwks.json file from /var/credentials/auth and empty PBL_AUTH_JWKS environment variable.
+
+    :return: None
+    """
+    if os.path.exists(constants.JWKS_LOCAL_PATH):
+        os.remove(constants.JWKS_LOCAL_PATH)
+
+    if os.getenv('PBL_AUTH_JWKS'):
+        del os.environ['PBL_AUTH_JWKS']
+
+
+def get_jwk_by_id(kid: str, jwks: dict) -> Optional[dict]:
+    """
+    Get and return a specific JWK from a provided Keys Set identified by a kid
+
+    :param kid: key id to look for
+    :param jwks: Full JWK Set
+    :return: JWK if found or None
+    """
+
+    jwk = None
+
+    for j in jwks['keys']:
+        if j['kid'] == kid:
+            jwk = j
+            break
+
+    return jwk
+
+
+def local_jwks_expired() -> bool:
+    """
+    Check if the JWKS stored locally is expired. The local copy of JWKS is considered as expired if
+    PBL_JWKS_LAST_UPDATE (env var) + JWKS_EXP_TIME (const) < time.time() (now)
+
+    :return: bool
+    """
+
+    last_update = os.getenv('PBL_JWKS_LAST_UPDATE')
+
+    if not last_update:
+        return True
+
+    return float(last_update) + constants.JWKS_EXP_TIME < time.time()
