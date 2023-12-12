@@ -247,9 +247,13 @@ server response.</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="pebbleauthclient.constants.JWKS_EXP_TIME">
-<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_EXP_TIME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_EXP_TIME" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_EXP_TIME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">86400</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_EXP_TIME" title="Link to this definition">#</a></dt>
 <dd><p>Duration in seconds after which Keys Set (JWKS) is considered as expired. All local copy of the keys must be destroyed 
-and the remote server will be requested to create the new copy.</p>
+and the remote server will be requested to create the new copy. Default value : 86400 sec (one day). This can be changed
+by exporting <cite>PBL_JWKS_EXP_TIME</cite> environment variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PBL_JWKS_EXP_TIME</span><span class="o">=</span><span class="mi">3600</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py data">
