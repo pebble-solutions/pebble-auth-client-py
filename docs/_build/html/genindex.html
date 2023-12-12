@@ -196,7 +196,7 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a></div>
 </section>
 <section id="A" class="genindex-section">
   <h2>A</h2>
@@ -280,12 +280,14 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="pebbleauthclient.models.html#pebbleauthclient.models.PebbleAuthToken.get_authenticated_licence">get_authenticated_licence() (pebbleauthclient.models.PebbleAuthToken method)</a>
 </li>
-        <li><a href="pebbleauthclient.html#pebbleauthclient.key.get_jwk_set">get_jwk_set() (in module pebbleauthclient.key)</a>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.key.get_jwk_by_id">get_jwk_by_id() (in module pebbleauthclient.key)</a>
 </li>
-        <li><a href="pebbleauthclient.html#pebbleauthclient.token_data.get_licence_object_from_token_data">get_licence_object_from_token_data() (in module pebbleauthclient.token_data)</a>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.key.get_jwk_set">get_jwk_set() (in module pebbleauthclient.key)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.token_data.get_licence_object_from_token_data">get_licence_object_from_token_data() (in module pebbleauthclient.token_data)</a>
+</li>
         <li><a href="pebbleauthclient.html#pebbleauthclient.token_data.get_token_data_from_jwt_payload">get_token_data_from_jwt_payload() (in module pebbleauthclient.token_data)</a>
 </li>
         <li><a href="pebbleauthclient.models.html#pebbleauthclient.models.AuthenticatedLicence.get_user">get_user() (pebbleauthclient.models.AuthenticatedLicence method)</a>
@@ -342,11 +344,23 @@
   <h2>J</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_LOCAL_PATH">JWKS_LOCAL_PATH (in module pebbleauthclient.constants)</a>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_EXP_TIME">JWKS_EXP_TIME (in module pebbleauthclient.constants)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_LOCAL_PATH">JWKS_LOCAL_PATH (in module pebbleauthclient.constants)</a>
+</li>
         <li><a href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_REMOTE_URI">JWKS_REMOTE_URI (in module pebbleauthclient.constants)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.errors.KidNotProvidedException">KidNotProvidedException</a>
 </li>
     </ul></td>
   </tr></table>
@@ -364,6 +378,8 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.key.local_jwks_expired">local_jwks_expired() (in module pebbleauthclient.key)</a>
+</li>
         <li><a href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.PebbleTokenData.lv">lv (pebbleauthclient.datatypes.PebbleTokenData attribute)</a>
 
         <ul>
@@ -489,6 +505,8 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="pebbleauthclient.html#pebbleauthclient.key.read_jwks">read_jwks() (in module pebbleauthclient.key)</a>
+</li>
+        <li><a href="pebbleauthclient.html#pebbleauthclient.key.reset_jwk_set">reset_jwk_set() (in module pebbleauthclient.key)</a>
 </li>
         <li><a href="pebbleauthclient.datatypes.html#pebbleauthclient.datatypes.PebbleTokenData.roles">roles (pebbleauthclient.datatypes.PebbleTokenData attribute)</a>
 

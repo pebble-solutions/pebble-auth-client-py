@@ -209,6 +209,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pebbleauthclient.html#submodules">Submodules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pebbleauthclient.html#module-pebbleauthclient.constants">pebbleauthclient.constants</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.constants.CERTS_FOLDER"><code class="docutils literal notranslate"><span class="pre">CERTS_FOLDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_EXP_TIME"><code class="docutils literal notranslate"><span class="pre">JWKS_EXP_TIME</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_LOCAL_PATH"><code class="docutils literal notranslate"><span class="pre">JWKS_LOCAL_PATH</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.constants.JWKS_REMOTE_URI"><code class="docutils literal notranslate"><span class="pre">JWKS_REMOTE_URI</span></code></a></li>
 </ul>
@@ -217,14 +218,18 @@
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.EmptyJWKSError"><code class="docutils literal notranslate"><span class="pre">EmptyJWKSError</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.EmptyJWKSRemoteURIError"><code class="docutils literal notranslate"><span class="pre">EmptyJWKSRemoteURIError</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.EmptyTokenError"><code class="docutils literal notranslate"><span class="pre">EmptyTokenError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.KidNotProvidedException"><code class="docutils literal notranslate"><span class="pre">KidNotProvidedException</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.NoAlgorithmProvidedError"><code class="docutils literal notranslate"><span class="pre">NoAlgorithmProvidedError</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.errors.NotFoundJWKError"><code class="docutils literal notranslate"><span class="pre">NotFoundJWKError</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="pebbleauthclient.html#module-pebbleauthclient.key">pebbleauthclient.key</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.get_jwk_by_id"><code class="docutils literal notranslate"><span class="pre">get_jwk_by_id()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.get_jwk_set"><code class="docutils literal notranslate"><span class="pre">get_jwk_set()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.import_remote_jwks"><code class="docutils literal notranslate"><span class="pre">import_remote_jwks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.local_jwks_expired"><code class="docutils literal notranslate"><span class="pre">local_jwks_expired()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.read_jwks"><code class="docutils literal notranslate"><span class="pre">read_jwks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pebbleauthclient.html#pebbleauthclient.key.reset_jwk_set"><code class="docutils literal notranslate"><span class="pre">reset_jwk_set()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="pebbleauthclient.html#module-pebbleauthclient.token_data">pebbleauthclient.token_data</a><ul>

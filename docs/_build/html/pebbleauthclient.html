@@ -246,6 +246,13 @@ server response.</p>
 </dd></dl>
 
 <dl class="py data">
+<dt class="sig sig-object py" id="pebbleauthclient.constants.JWKS_EXP_TIME">
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_EXP_TIME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_EXP_TIME" title="Link to this definition">#</a></dt>
+<dd><p>Duration in seconds after which Keys Set (JWKS) is considered as expired. All local copy of the keys must be destroyed 
+and the remote server will be requested to create the new copy.</p>
+</dd></dl>
+
+<dl class="py data">
 <dt class="sig sig-object py" id="pebbleauthclient.constants.JWKS_LOCAL_PATH">
 <span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_LOCAL_PATH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'./var/credentials/auth/jwks.json'</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_LOCAL_PATH" title="Link to this definition">#</a></dt>
 <dd><p>Contains the local path for the public keys set (JWKS)</p>
@@ -253,7 +260,7 @@ server response.</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="pebbleauthclient.constants.JWKS_REMOTE_URI">
-<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_REMOTE_URI</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_REMOTE_URI" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_REMOTE_URI</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://storage.googleapis.com/pebble-public-cdn/test_auth/jwks_test.json'</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_REMOTE_URI" title="Link to this definition">#</a></dt>
 <dd><p>Return the location of remote pebble authenticator public keys set (JWKS) as defined in the sys global
 environment variables</p>
 </dd></dl>
@@ -296,6 +303,14 @@ If this error occurs, you should export <code class="docutils literal notranslat
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="pebbleauthclient.errors.KidNotProvidedException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pebbleauthclient.errors.</span></span><span class="sig-name descname"><span class="pre">KidNotProvidedException</span></span><a class="reference internal" href="_modules/pebbleauthclient/errors.html#KidNotProvidedException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.errors.KidNotProvidedException" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>This error should be raised when the JWT does not have the kid claim on its header. The kid is mandatory to
+identify which key must be used from the Key Set.</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="pebbleauthclient.errors.NoAlgorithmProvidedError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pebbleauthclient.errors.</span></span><span class="sig-name descname"><span class="pre">NoAlgorithmProvidedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pebbleauthclient/errors.html#NoAlgorithmProvidedError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.errors.NoAlgorithmProvidedError" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
@@ -323,6 +338,23 @@ If this error occurs, you should export <code class="docutils literal notranslat
 <section id="module-pebbleauthclient.key">
 <span id="pebbleauthclient-key"></span><h3>pebbleauthclient.key<a class="headerlink" href="#module-pebbleauthclient.key" title="Link to this heading">#</a></h3>
 <dl class="py function">
+<dt class="sig sig-object py" id="pebbleauthclient.key.get_jwk_by_id">
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.key.</span></span><span class="sig-name descname"><span class="pre">get_jwk_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jwks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/key.html#get_jwk_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.key.get_jwk_by_id" title="Link to this definition">#</a></dt>
+<dd><p>Get and return a specific JWK from a provided Keys Set identified by a kid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kid</strong> – key id to look for</p></li>
+<li><p><strong>jwks</strong> – Full JWK Set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JWK if found or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="pebbleauthclient.key.get_jwk_set">
 <span class="sig-prename descclassname"><span class="pre">pebbleauthclient.key.</span></span><span class="sig-name descname"><span class="pre">get_jwk_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/key.html#get_jwk_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.key.get_jwk_set" title="Link to this definition">#</a></dt>
 <dd><p>Return all the JWK currently stored in jwks.json file or in the process memory.</p>
@@ -348,12 +380,35 @@ If this error occurs, you should export <code class="docutils literal notranslat
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="pebbleauthclient.key.local_jwks_expired">
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.key.</span></span><span class="sig-name descname"><span class="pre">local_jwks_expired</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/key.html#local_jwks_expired"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.key.local_jwks_expired" title="Link to this definition">#</a></dt>
+<dd><p>Check if the JWKS stored locally is expired. The local copy of JWKS is considered as expired if
+PBL_JWKS_LAST_UPDATE (env var) + JWKS_EXP_TIME (const) &lt; time.time() (now)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="pebbleauthclient.key.read_jwks">
 <span class="sig-prename descclassname"><span class="pre">pebbleauthclient.key.</span></span><span class="sig-name descname"><span class="pre">read_jwks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/key.html#read_jwks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.key.read_jwks" title="Link to this definition">#</a></dt>
 <dd><p>Read the public RSA key from /var/credentials/auth/jwks.json and convert it into JWK Set</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pebbleauthclient.key.reset_jwk_set">
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.key.</span></span><span class="sig-name descname"><span class="pre">reset_jwk_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/key.html#reset_jwk_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.key.reset_jwk_set" title="Link to this definition">#</a></dt>
+<dd><p>Remove jwks.json file from /var/credentials/auth and empty PBL_AUTH_JWKS environment variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -485,6 +540,7 @@ If this error occurs, you should export <code class="docutils literal notranslat
 <li><a class="reference internal" href="#submodules">Submodules</a><ul>
 <li><a class="reference internal" href="#module-pebbleauthclient.constants">pebbleauthclient.constants</a><ul>
 <li><a class="reference internal" href="#pebbleauthclient.constants.CERTS_FOLDER"><code class="docutils literal notranslate"><span class="pre">CERTS_FOLDER</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.constants.JWKS_EXP_TIME"><code class="docutils literal notranslate"><span class="pre">JWKS_EXP_TIME</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.constants.JWKS_LOCAL_PATH"><code class="docutils literal notranslate"><span class="pre">JWKS_LOCAL_PATH</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.constants.JWKS_REMOTE_URI"><code class="docutils literal notranslate"><span class="pre">JWKS_REMOTE_URI</span></code></a></li>
 </ul>
@@ -493,14 +549,18 @@ If this error occurs, you should export <code class="docutils literal notranslat
 <li><a class="reference internal" href="#pebbleauthclient.errors.EmptyJWKSError"><code class="docutils literal notranslate"><span class="pre">EmptyJWKSError</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.errors.EmptyJWKSRemoteURIError"><code class="docutils literal notranslate"><span class="pre">EmptyJWKSRemoteURIError</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.errors.EmptyTokenError"><code class="docutils literal notranslate"><span class="pre">EmptyTokenError</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.errors.KidNotProvidedException"><code class="docutils literal notranslate"><span class="pre">KidNotProvidedException</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.errors.NoAlgorithmProvidedError"><code class="docutils literal notranslate"><span class="pre">NoAlgorithmProvidedError</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.errors.NotFoundJWKError"><code class="docutils literal notranslate"><span class="pre">NotFoundJWKError</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-pebbleauthclient.key">pebbleauthclient.key</a><ul>
+<li><a class="reference internal" href="#pebbleauthclient.key.get_jwk_by_id"><code class="docutils literal notranslate"><span class="pre">get_jwk_by_id()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.key.get_jwk_set"><code class="docutils literal notranslate"><span class="pre">get_jwk_set()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.key.import_remote_jwks"><code class="docutils literal notranslate"><span class="pre">import_remote_jwks()</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.key.local_jwks_expired"><code class="docutils literal notranslate"><span class="pre">local_jwks_expired()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.key.read_jwks"><code class="docutils literal notranslate"><span class="pre">read_jwks()</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.key.reset_jwk_set"><code class="docutils literal notranslate"><span class="pre">reset_jwk_set()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-pebbleauthclient.token_data">pebbleauthclient.token_data</a><ul>

@@ -212,6 +212,7 @@
 
 <span class="sd">        ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The public JWK Set URI is empty. It can be due to a misconfiguration on your server. Did you &quot;</span>
                    <span class="s2">&quot;export PBL_JWKS_REMOTE_URI environment variable on your system or on your .env file ?&quot;</span><span class="p">)</span>
@@ -226,6 +227,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This error should be raised when the JWK set is empty. jwks.json might be corrupted, empty or not exists.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Public keys set is empty. jwks.json file might be corrupted, empty or not exist.&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
@@ -240,6 +242,7 @@
 
 <span class="sd">    :param kid: key id that cause the error</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kid</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;JWK key was not found for this kid (&quot;</span> <span class="o">+</span> <span class="n">kid</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
@@ -254,6 +257,7 @@
 
 <span class="sd">    :param kid: key id that cause the error</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kid</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;No algorithm is provided for this JWK (&quot;</span> <span class="o">+</span> <span class="n">kid</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;). It might be cause by a badly encoded of the &quot;</span>
                                                                      <span class="s2">&quot;public Json Web Key (JWK).&quot;</span><span class="p">)</span>
@@ -267,8 +271,24 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This error should be raised when the token is not provided or empty.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Empty token.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="KidNotProvidedException">
+<a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.errors.KidNotProvidedException">[docs]</a>
+<span class="k">class</span> <span class="nc">KidNotProvidedException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This error should be raised when the JWT does not have the kid claim on its header. The kid is mandatory to</span>
+<span class="sd">    identify which key must be used from the Key Set.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;kid claim is not provided by the token. The kid is mandatory to identify which key must be used &quot;</span>
+                   <span class="s2">&quot;from the key set.&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
 
 </pre></div>

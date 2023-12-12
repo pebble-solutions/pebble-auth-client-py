@@ -155,12 +155,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../modules.html">pebbleauthclient</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of pebbleauthclient</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../pebbleauthclient.html">pebbleauthclient package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of pebbleauthclient package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../pebbleauthclient.datatypes.html">pebbleauthclient.datatypes package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../pebbleauthclient.models.html">pebbleauthclient.models package</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pebbleauthclient.html">pebbleauthclient API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of pebbleauthclient API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pebbleauthclient.datatypes.html">pebbleauthclient.datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pebbleauthclient.models.html">pebbleauthclient.models</a></li>
 </ul>
 </li>
 </ul>
@@ -199,9 +197,11 @@
           <h1>Source code for pebbleauthclient.key</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
 
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">import</span> <span class="nn">pebbleauthclient.constants</span> <span class="k">as</span> <span class="nn">constants</span>
 <span class="kn">from</span> <span class="nn">pebbleauthclient.errors</span> <span class="kn">import</span> <span class="n">EmptyJWKSRemoteURIError</span><span class="p">,</span> <span class="n">EmptyJWKSError</span>
@@ -215,9 +215,14 @@
 
 <span class="sd">    :return: dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">local_jwks_expired</span><span class="p">():</span>
+        <span class="n">reset_jwk_set</span><span class="p">()</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PBL_AUTH_JWKS&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NOTICE: Store JWKS in process environment variable&quot;</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PBL_AUTH_JWKS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">read_jwks</span><span class="p">())</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PBL_JWKS_LAST_UPDATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PBL_AUTH_JWKS&#39;</span><span class="p">))</span></div>
 
 
@@ -265,6 +270,63 @@
         <span class="k">raise</span> <span class="n">EmptyJWKSError</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="reset_jwk_set">
+<a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.key.reset_jwk_set">[docs]</a>
+<span class="k">def</span> <span class="nf">reset_jwk_set</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove jwks.json file from /var/credentials/auth and empty PBL_AUTH_JWKS environment variable.</span>
+
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">JWKS_LOCAL_PATH</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">JWKS_LOCAL_PATH</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PBL_AUTH_JWKS&#39;</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PBL_AUTH_JWKS&#39;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="get_jwk_by_id">
+<a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.key.get_jwk_by_id">[docs]</a>
+<span class="k">def</span> <span class="nf">get_jwk_by_id</span><span class="p">(</span><span class="n">kid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">jwks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get and return a specific JWK from a provided Keys Set identified by a kid</span>
+
+<span class="sd">    :param kid: key id to look for</span>
+<span class="sd">    :param jwks: Full JWK Set</span>
+<span class="sd">    :return: JWK if found or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">jwk</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jwks</span><span class="p">[</span><span class="s1">&#39;keys&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;kid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">kid</span><span class="p">:</span>
+            <span class="n">jwk</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">jwk</span></div>
+
+
+
+<div class="viewcode-block" id="local_jwks_expired">
+<a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.key.local_jwks_expired">[docs]</a>
+<span class="k">def</span> <span class="nf">local_jwks_expired</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the JWKS stored locally is expired. The local copy of JWKS is considered as expired if</span>
+<span class="sd">    PBL_JWKS_LAST_UPDATE (env var) + JWKS_EXP_TIME (const) &lt; time.time() (now)</span>
+
+<span class="sd">    :return: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">last_update</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PBL_JWKS_LAST_UPDATE&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">last_update</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">last_update</span><span class="p">)</span> <span class="o">+</span> <span class="n">constants</span><span class="o">.</span><span class="n">JWKS_EXP_TIME</span> <span class="o">&lt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
 
 </pre></div>
         </article>

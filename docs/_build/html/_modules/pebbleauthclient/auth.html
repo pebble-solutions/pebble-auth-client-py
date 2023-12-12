@@ -198,8 +198,8 @@
 <span></span><span class="kn">import</span> <span class="nn">jwt</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
-<span class="kn">from</span> <span class="nn">pebbleauthclient.errors</span> <span class="kn">import</span> <span class="n">NotFoundJWKError</span><span class="p">,</span> <span class="n">NoAlgorithmProvidedError</span><span class="p">,</span> <span class="n">EmptyTokenError</span>
-<span class="kn">from</span> <span class="nn">pebbleauthclient.key</span> <span class="kn">import</span> <span class="n">get_jwk_set</span>
+<span class="kn">from</span> <span class="nn">pebbleauthclient.errors</span> <span class="kn">import</span> <span class="n">NotFoundJWKError</span><span class="p">,</span> <span class="n">NoAlgorithmProvidedError</span><span class="p">,</span> <span class="n">EmptyTokenError</span><span class="p">,</span> <span class="n">KidNotProvidedException</span>
+<span class="kn">from</span> <span class="nn">pebbleauthclient.key</span> <span class="kn">import</span> <span class="n">get_jwk_set</span><span class="p">,</span> <span class="n">get_jwk_by_id</span><span class="p">,</span> <span class="n">reset_jwk_set</span>
 <span class="kn">from</span> <span class="nn">pebbleauthclient.models</span> <span class="kn">import</span> <span class="n">PebbleAuthToken</span>
 <span class="kn">from</span> <span class="nn">pebbleauthclient.token_data</span> <span class="kn">import</span> <span class="n">get_token_data_from_jwt_payload</span>
 
@@ -214,23 +214,28 @@
 <span class="sd">    :return: PebbleAuthToken</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">jwks</span> <span class="o">=</span> <span class="n">get_jwk_set</span><span class="p">()</span>
-
     <span class="n">kid</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">get_unverified_header</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kid&#39;</span><span class="p">)</span>
 
-    <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">jwk</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">KidNotProvidedException</span>
 
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jwks</span><span class="p">[</span><span class="s1">&#39;keys&#39;</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s1">&#39;kid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">kid</span><span class="p">:</span>
-            <span class="n">key</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">RSAAlgorithm</span><span class="o">.</span><span class="n">from_jwk</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
-            <span class="n">jwk</span> <span class="o">=</span> <span class="n">j</span>
-            <span class="k">break</span>
+    <span class="n">jwk</span> <span class="o">=</span> <span class="n">get_jwk_by_id</span><span class="p">(</span><span class="n">kid</span><span class="p">,</span> <span class="n">jwks</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
+    <span class="c1"># In the case that no jwk has been found for this kid, we should re-check the remote server for new keys.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">jwk</span><span class="p">:</span>
+        <span class="n">reset_jwk_set</span><span class="p">()</span>
+
+        <span class="n">jwks</span> <span class="o">=</span> <span class="n">get_jwk_set</span><span class="p">()</span>
+        <span class="n">jwk</span> <span class="o">=</span> <span class="n">get_jwk_by_id</span><span class="p">(</span><span class="n">kid</span><span class="p">,</span> <span class="n">jwks</span><span class="p">)</span>
+
+    <span class="c1"># After re-check the remote server, if no jwk has been found for the kid, it is not possible de decode the JWT</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">jwk</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NotFoundJWKError</span><span class="p">(</span><span class="n">kid</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s2">&quot;alg&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">jwk</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoAlgorithmProvidedError</span><span class="p">(</span><span class="n">kid</span><span class="p">)</span>
+
+    <span class="n">key</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">RSAAlgorithm</span><span class="o">.</span><span class="n">from_jwk</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jwk</span><span class="p">))</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
         <span class="n">jwt</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
