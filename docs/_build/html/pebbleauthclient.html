@@ -202,11 +202,15 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pebbleauthclient" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pebbleauthclient.auth">
-<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.</span></span><span class="sig-name descname"><span class="pre">auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pebbleauthclient.models.html#pebbleauthclient.models.PebbleAuthToken" title="pebbleauthclient.models.PebbleAuthToken.PebbleAuthToken"><span class="pre">PebbleAuthToken</span></a></span></span><a class="reference internal" href="_modules/pebbleauthclient/auth.html#auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.auth" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.</span></span><span class="sig-name descname"><span class="pre">auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pebbleauthclient.models.html#pebbleauthclient.models.PebbleAuthToken" title="pebbleauthclient.models.PebbleAuthToken.PebbleAuthToken"><span class="pre">PebbleAuthToken</span></a></span></span><a class="reference internal" href="_modules/pebbleauthclient/auth.html#auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.auth" title="Link to this definition">#</a></dt>
 <dd><p>Authenticate a provided token into and return a valid PebbleAuthToken object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>token</strong> – str</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> – str               Incoming token that must be verified</p></li>
+<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
+audience for resource API.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>PebbleAuthToken</p>
@@ -216,7 +220,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pebbleauthclient.auth_from_http_headers">
-<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.</span></span><span class="sig-name descname"><span class="pre">auth_from_http_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pebbleauthclient.models.html#pebbleauthclient.models.PebbleAuthToken" title="pebbleauthclient.models.PebbleAuthToken.PebbleAuthToken"><span class="pre">PebbleAuthToken</span></a></span></span><a class="reference internal" href="_modules/pebbleauthclient/auth.html#auth_from_http_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.auth_from_http_headers" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.</span></span><span class="sig-name descname"><span class="pre">auth_from_http_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pebbleauthclient.models.html#pebbleauthclient.models.PebbleAuthToken" title="pebbleauthclient.models.PebbleAuthToken.PebbleAuthToken"><span class="pre">PebbleAuthToken</span></a></span></span><a class="reference internal" href="_modules/pebbleauthclient/auth.html#auth_from_http_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.auth_from_http_headers" title="Link to this definition">#</a></dt>
 <dd><p>Authenticate user using the HTTP Authorization header provided with the request</p>
 <p>The Authorization headers must be written according to the standard :</p>
 <ul class="simple">
@@ -225,7 +229,11 @@
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>headers</strong> – All provided headers (including Authorization) in a dict</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>headers</strong> – dict             All provided headers (including Authorization) in a dict</p></li>
+<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
+audience for resource API.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>PebbleAuthToken</p>
@@ -264,7 +272,7 @@ by exporting <cite>PBL_JWKS_EXP_TIME</cite> environment variable.</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="pebbleauthclient.constants.JWKS_REMOTE_URI">
-<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_REMOTE_URI</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://storage.googleapis.com/pebble-public-cdn/test_auth/jwks_test.json'</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_REMOTE_URI" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">JWKS_REMOTE_URI</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pebbleauthclient.constants.JWKS_REMOTE_URI" title="Link to this definition">#</a></dt>
 <dd><p>Return the location of remote pebble authenticator public keys set (JWKS) as defined in the sys global
 environment variables</p>
 </dd></dl>

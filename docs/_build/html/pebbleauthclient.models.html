@@ -213,7 +213,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.AuthenticatedLicence.app">
 <span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.AuthenticatedLicence.app" title="Link to this definition">#</a></dt>
-<dd><p>Application for which the licence is generated</p>
+<dd><p>Application for which the licence is generated (client_id or application name)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -228,9 +228,9 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="pebbleauthclient.models.AuthenticatedLicence.id">
-<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.AuthenticatedLicence.id" title="Link to this definition">#</a></dt>
-<dd><p>Licence ID as registered in the Licence server</p>
+<dt class="sig sig-object py" id="pebbleauthclient.models.AuthenticatedLicence.issuer">
+<span class="sig-name descname"><span class="pre">issuer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.AuthenticatedLicence.issuer" title="Link to this definition">#</a></dt>
+<dd><p>Server that issued the authorization</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -259,8 +259,14 @@
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.aud">
-<span class="sig-name descname"><span class="pre">aud</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.aud" title="Link to this definition">#</a></dt>
-<dd><p>Application for which the token is generated</p>
+<span class="sig-name descname"><span class="pre">aud</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.aud" title="Link to this definition">#</a></dt>
+<dd><p>Audience for which the token is generated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.client_id">
+<span class="sig-name descname"><span class="pre">client_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.client_id" title="Link to this definition">#</a></dt>
+<dd><p>Identify the frontend application or the API key that send the request</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -304,6 +310,12 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.jti">
+<span class="sig-name descname"><span class="pre">jti</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.jti" title="Link to this definition">#</a></dt>
+<dd><p>Unique identifier for the token</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.lv">
 <span class="sig-name descname"><span class="pre">lv</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.lv" title="Link to this definition">#</a></dt>
 <dd><p>From 1-6 : user level affected by the licence</p>
@@ -319,6 +331,12 @@
 <dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.roles">
 <span class="sig-name descname"><span class="pre">roles</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.roles" title="Link to this definition">#</a></dt>
 <dd><p>Roles attributed to the user</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pebbleauthclient.models.PebbleAuthToken.scope">
+<span class="sig-name descname"><span class="pre">scope</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.PebbleAuthToken.scope" title="Link to this definition">#</a></dt>
+<dd><p>List of scopes granted by the token. Each scope is separated by one space</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -384,6 +402,12 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="pebbleauthclient.models.User.scopes">
+<span class="sig-name descname"><span class="pre">scopes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pebbleauthclient.models.User.scopes" title="Link to this definition">#</a></dt>
+<dd><p>List of authorized scope for the user</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.User.username">
 <span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pebbleauthclient.models.User.username" title="Link to this definition">#</a></dt>
 <dd><p>User name (should be an email)</p>
@@ -446,21 +470,24 @@
 <li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence</span></code></a><ul>
 <li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.app"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.app</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.get_user"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.get_user()</span></code></a></li>
-<li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.id"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.id</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.issuer"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.issuer</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.tenant_id"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.tenant_id</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.AuthenticatedLicence.user"><code class="docutils literal notranslate"><span class="pre">AuthenticatedLicence.user</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken</span></code></a><ul>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.aud"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.aud</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.client_id"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.client_id</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.exp"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.exp</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.get_authenticated_licence"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.get_authenticated_licence()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.get_user"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.get_user()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.iat"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.iat</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.iss"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.iss</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.jti"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.jti</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.lv"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.lv</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.name"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.name</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.roles"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.roles</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.scope"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.scope</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.sub"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.sub</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.tid"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.tid</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.PebbleAuthToken.token"><code class="docutils literal notranslate"><span class="pre">PebbleAuthToken.token</span></code></a></li>
@@ -471,6 +498,7 @@
 <li><a class="reference internal" href="#pebbleauthclient.models.User.has_role"><code class="docutils literal notranslate"><span class="pre">User.has_role()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.level"><code class="docutils literal notranslate"><span class="pre">User.level</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.roles"><code class="docutils literal notranslate"><span class="pre">User.roles</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.User.scopes"><code class="docutils literal notranslate"><span class="pre">User.scopes</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
 </ul>
 </li>

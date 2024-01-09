@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>pebbleauthclient.auth - Pebble Auth Client 0.1.3 documentation</title>
+        <title>pebbleauthclient.auth - Pebble Auth Client 0.1.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">Pebble Auth Client 0.1.3 documentation</div></a>
+      <a href="../../index.html"><div class="brand">Pebble Auth Client 0.1.5 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">Pebble Auth Client 0.1.3 documentation</span>
+  <span class="sidebar-brand-text">Pebble Auth Client 0.1.5 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -206,11 +206,14 @@
 
 <div class="viewcode-block" id="auth">
 <a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.auth">[docs]</a>
-<span class="k">def</span> <span class="nf">auth</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PebbleAuthToken</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">auth</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PebbleAuthToken</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Authenticate a provided token into and return a valid PebbleAuthToken object</span>
 
-<span class="sd">    :param token: str</span>
+<span class="sd">    :param token: str               Incoming token that must be verified</span>
+<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control</span>
+<span class="sd">                                    audience for resource API.</span>
+
 <span class="sd">    :return: PebbleAuthToken</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">jwks</span> <span class="o">=</span> <span class="n">get_jwk_set</span><span class="p">()</span>
@@ -235,15 +238,28 @@
     <span class="k">if</span> <span class="s2">&quot;alg&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">jwk</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NoAlgorithmProvidedError</span><span class="p">(</span><span class="n">kid</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">claims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;audience&#39;</span><span class="p">,</span> <span class="s1">&#39;issuer&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">claim</span> <span class="ow">in</span> <span class="n">claims</span><span class="p">:</span>
+        <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="n">verif_aud</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;audience&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
+    <span class="n">verif_iss</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;issuer&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
+
     <span class="n">key</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">RSAAlgorithm</span><span class="o">.</span><span class="n">from_jwk</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jwk</span><span class="p">))</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
         <span class="n">jwt</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
         <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
         <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="n">jwk</span><span class="p">[</span><span class="s1">&#39;alg&#39;</span><span class="p">]],</span>
+        <span class="n">audience</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;audience&#39;</span><span class="p">],</span>
+        <span class="n">issuer</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;issuer&#39;</span><span class="p">],</span>
         <span class="n">options</span><span class="o">=</span><span class="p">{</span>
-            <span class="s2">&quot;verify_aud&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;verify_iss&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="s2">&quot;verify_aud&quot;</span><span class="p">:</span> <span class="n">verif_aud</span><span class="p">,</span>
+            <span class="s2">&quot;verify_iss&quot;</span><span class="p">:</span> <span class="n">verif_iss</span>
         <span class="p">}</span>
     <span class="p">)</span>
 
@@ -255,7 +271,7 @@
 
 <div class="viewcode-block" id="auth_from_http_headers">
 <a class="viewcode-back" href="../../pebbleauthclient.html#pebbleauthclient.auth_from_http_headers">[docs]</a>
-<span class="k">def</span> <span class="nf">auth_from_http_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PebbleAuthToken</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">auth_from_http_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PebbleAuthToken</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Authenticate user using the HTTP Authorization header provided with the request</span>
 
@@ -264,13 +280,16 @@
 <span class="sd">    - Authorization name with capitalized A</span>
 <span class="sd">    - Token content must start with &quot;Bearer &quot; string (ex : *Bearer full_token_string*)</span>
 
-<span class="sd">    :param headers: All provided headers (including Authorization) in a dict</span>
+<span class="sd">    :param headers: dict             All provided headers (including Authorization) in a dict</span>
+<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control</span>
+<span class="sd">                                    audience for resource API.</span>
+
 <span class="sd">    :return: PebbleAuthToken</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]:</span>
         <span class="n">token</span> <span class="o">=</span> <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Bearer &#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">auth</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">auth</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
 
     <span class="k">raise</span> <span class="n">EmptyTokenError</span><span class="p">()</span></div>
 
@@ -306,7 +325,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=360bc84d"></script>
+</div><script src="../../_static/documentation_options.js?v=59fadc99"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
