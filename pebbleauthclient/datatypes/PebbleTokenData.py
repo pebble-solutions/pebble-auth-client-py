@@ -4,8 +4,8 @@ from typing import Sequence
 
 @dataclass
 class PebbleTokenData:
-    aud: str
-    """Application for which the token is generated"""
+    aud: Sequence[str]
+    """Audience for which the token is generated"""
 
     exp: int
     """Expiration timestamp"""
@@ -25,11 +25,20 @@ class PebbleTokenData:
     roles: Sequence[str]
     """Roles attributed to the user"""
 
+    scope: str
+    """List of scopes granted by the token. Each scope is separated by one space"""
+
     sub: str
     """User email (used as username)"""
 
     tid: str
     """Tenant ID : customer id, client id... that will consume resources"""
+
+    jti: str
+    """Unique identifier for the token"""
+
+    client_id: str
+    """Identify the frontend application or the API key that send the request"""
 
     token: str
     """Token from which datas has been deserialized"""

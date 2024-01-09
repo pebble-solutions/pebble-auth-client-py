@@ -16,13 +16,14 @@ def get_licence_object_from_token_data(token_data: PebbleTokenData) -> Authentic
             username=token_data.sub,
             roles=token_data.roles,
             level=token_data.lv,
-            display_name=token_data.name
+            display_name=token_data.name,
+            scopes=token_data.scope.split(" ") if token_data.scope else []
         )
     )
 
     return AuthenticatedLicenceObject(
-        app=token_data.aud,
-        id=token_data.iss,
+        app=token_data.client_id,
+        issuer=token_data.iss,
         tenant_id=token_data.tid,
         user=user
     )

@@ -4,10 +4,10 @@ from dataclasses import dataclass
 @dataclass
 class AuthenticatedLicenceObject:
     app: str
-    """Application for which the licence is generated"""
+    """Application for which the licence is generated (client_id or application name)"""
 
-    id: str
-    """Licence ID as registered in the Licence server"""
+    issuer: str
+    """Server that issued the authorization"""
 
     tenant_id: str
     """Customer id, client id... that will consume resources"""

@@ -15,3 +15,6 @@ class UserObject:
 
     roles: Sequence[str]
     """Roles affected to the user"""
+
+    scopes: Sequence[str]
+    """List of authorized scope for the user"""

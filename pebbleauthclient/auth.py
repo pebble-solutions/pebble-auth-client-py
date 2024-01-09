@@ -7,11 +7,14 @@ from pebbleauthclient.models import PebbleAuthToken
 from pebbleauthclient.token_data import get_token_data_from_jwt_payload
 
 
-def auth(token: str) -> PebbleAuthToken:
+def auth(token: str, options: dict = None) -> PebbleAuthToken:
     """
     Authenticate a provided token into and return a valid PebbleAuthToken object
 
-    :param token: str
+    :param token: str               Incoming token that must be verified
+    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
+                                    audience for resource API.
+
     :return: PebbleAuthToken
     """
     jwks = get_jwk_set()
@@ -36,15 +39,28 @@ def auth(token: str) -> PebbleAuthToken:
     if "alg" not in jwk:
         raise NoAlgorithmProvidedError(kid)
 
+    if not options:
+        options = {}
+
+    claims = ['audience', 'issuer']
+
+    for claim in claims:
+        options[claim] = options[claim] if options[claim] else None
+
+    verif_aud = True if options['audience'] else False
+    verif_iss = True if options['issuer'] else False
+
     key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(jwk))
 
     data = jwt.decode(
         jwt=token,
         key=key,
         algorithms=[jwk['alg']],
+        audience=options['audience'],
+        issuer=options['issuer'],
         options={
-            "verify_aud": False,
-            "verify_iss": False
+            "verify_aud": verif_aud,
+            "verify_iss": verif_iss
         }
     )
 
@@ -53,7 +69,7 @@ def auth(token: str) -> PebbleAuthToken:
     return PebbleAuthToken(token_data)
 
 
-def auth_from_http_headers(headers: dict) -> PebbleAuthToken:
+def auth_from_http_headers(headers: dict, options: dict = None) -> PebbleAuthToken:
     """
     Authenticate user using the HTTP Authorization header provided with the request
 
@@ -62,12 +78,15 @@ def auth_from_http_headers(headers: dict) -> PebbleAuthToken:
     - Authorization name with capitalized A
     - Token content must start with "Bearer " string (ex : *Bearer full_token_string*)
 
-    :param headers: All provided headers (including Authorization) in a dict
+    :param headers: dict             All provided headers (including Authorization) in a dict
+    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
+                                    audience for resource API.
+
     :return: PebbleAuthToken
     """
 
     if headers['Authorization']:
         token = headers['Authorization'].replace('Bearer ', "")
-        return auth(token)
+        return auth(token, options)
 
     raise EmptyTokenError()

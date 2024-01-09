@@ -22,6 +22,9 @@ class PebbleAuthToken(PebbleTokenData):
         self.roles = token_data.roles
         self.sub = token_data.sub
         self.tid = token_data.tid
+        self.jti = token_data.jti
+        self.scope = token_data.scope
+        self.client_id = token_data.client_id
         self.token = token_data.token
 
     def get_authenticated_licence(self) -> AuthenticatedLicence:

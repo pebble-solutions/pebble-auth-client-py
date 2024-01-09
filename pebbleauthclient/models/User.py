@@ -22,6 +22,9 @@ class User(UserObject):
         self.roles: Sequence[str] = user.roles
         """Roles granted to the user"""
 
+        self.scopes: Sequence[str] = user.scopes
+        """List of authorized scope for the user"""
+
     def has_role(self, role: str) -> bool:
         """
         Check if the user has the argument specified role.
