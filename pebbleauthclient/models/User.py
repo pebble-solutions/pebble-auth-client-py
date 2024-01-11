@@ -1,3 +1,4 @@
+import re
 from typing import Sequence
 from pebbleauthclient.datatypes import UserObject
 
@@ -35,3 +36,43 @@ class User(UserObject):
         if self.roles:
             return role in self.roles
         return False
+
+    def has_scopes(self, scopes: Sequence[str], policy: str = None) -> bool:
+        """
+        Check if the user is granted on the provided scopes.
+
+        :param scopes: Sequence[str]    A list of scopes
+        :param policy: str              ONE = Return true if one scope is valid, ALL = Return true if all scope are
+                                        valid. Default is ONE
+
+        :return:
+        """
+
+        policy = policy if policy else 'ONE'
+
+        if not self.scopes or not len(scopes):
+            return False
+
+        count = 0
+
+        for input_scope in scopes:
+
+            # This line gets the unfiltered action: api:action.filter become api: action
+            unfiltered_scope = re.sub('\.[\w\*]+$', "", input_scope)
+
+            # This line gets the action name only
+            action = re.sub('^\w+:(\w+)\.?[\w\*]*', r"\1", input_scope)
+
+            for user_scope in self.scopes:
+
+                # If the user scope use a joker ( * ), it is replaced with the current action (joker means any action).
+                if re.match(':\*', user_scope):
+                    user_scope = re.sub(':\*', ":"+action, user_scope)
+
+                if input_scope == user_scope or unfiltered_scope == user_scope:
+                    if policy.upper() == 'ONE':
+                        return True
+
+                    count +=1
+
+            return count >= len(scopes)
