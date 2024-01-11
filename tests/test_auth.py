@@ -13,7 +13,9 @@ while True:
     if token.lower() == "q":
         break"""
 
-auth_token = auth(token)
+auth_token = auth(token, options={
+    'audience': "api.pebble.solutions/v5/action"
+})
 user = auth_token.get_user()
 licence = auth_token.get_authenticated_licence()
 

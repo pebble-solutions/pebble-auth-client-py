@@ -14,8 +14,8 @@ def auth(token: str, options: dict = None) -> PebbleAuthToken:
     Authenticate a provided token into and return a valid PebbleAuthToken object
 
     :param token: str               Incoming token that must be verified
-    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
-                                    audience for resource API.
+    :param options: dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its
+                                    audience name.
 
     :return: PebbleAuthToken
     """
@@ -80,9 +80,9 @@ def auth_from_http_headers(headers: dict, options: dict = None) -> PebbleAuthTok
     - Authorization name with capitalized A
     - Token content must start with "Bearer " string (ex : *Bearer full_token_string*)
 
-    :param headers: dict             All provided headers (including Authorization) in a dict
-    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
-                                    audience for resource API.
+    :param headers: dict            All provided headers (including Authorization) in a dict
+    :param options: dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its
+                                    audience name.
 
     :return: PebbleAuthToken
     """
