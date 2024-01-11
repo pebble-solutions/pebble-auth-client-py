@@ -389,6 +389,24 @@
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pebbleauthclient.models.User.has_scopes">
+<span class="sig-name descname"><span class="pre">has_scopes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scopes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pebbleauthclient/models/User.html#User.has_scopes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pebbleauthclient.models.User.has_scopes" title="Link to this definition">#</a></dt>
+<dd><p>Check if the user is granted on the provided scopes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scopes</strong> – Sequence[str]    A list of scopes</p></li>
+<li><p><strong>policy</strong> – str              ONE = Return true if one scope is valid, ALL = Return true if all scope are
+valid. Default is ONE</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pebbleauthclient.models.User.level">
 <span class="sig-name descname"><span class="pre">level</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pebbleauthclient.models.User.level" title="Link to this definition">#</a></dt>
@@ -496,6 +514,7 @@
 <li><a class="reference internal" href="#pebbleauthclient.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.display_name"><code class="docutils literal notranslate"><span class="pre">User.display_name</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.has_role"><code class="docutils literal notranslate"><span class="pre">User.has_role()</span></code></a></li>
+<li><a class="reference internal" href="#pebbleauthclient.models.User.has_scopes"><code class="docutils literal notranslate"><span class="pre">User.has_scopes()</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.level"><code class="docutils literal notranslate"><span class="pre">User.level</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.roles"><code class="docutils literal notranslate"><span class="pre">User.roles</span></code></a></li>
 <li><a class="reference internal" href="#pebbleauthclient.models.User.scopes"><code class="docutils literal notranslate"><span class="pre">User.scopes</span></code></a></li>
