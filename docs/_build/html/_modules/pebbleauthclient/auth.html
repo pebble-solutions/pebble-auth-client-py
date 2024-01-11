@@ -213,8 +213,8 @@
 <span class="sd">    Authenticate a provided token into and return a valid PebbleAuthToken object</span>
 
 <span class="sd">    :param token: str               Incoming token that must be verified</span>
-<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control</span>
-<span class="sd">                                    audience for resource API.</span>
+<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its</span>
+<span class="sd">                                    audience name.</span>
 
 <span class="sd">    :return: PebbleAuthToken</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -282,9 +282,9 @@
 <span class="sd">    - Authorization name with capitalized A</span>
 <span class="sd">    - Token content must start with &quot;Bearer &quot; string (ex : *Bearer full_token_string*)</span>
 
-<span class="sd">    :param headers: dict             All provided headers (including Authorization) in a dict</span>
-<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control</span>
-<span class="sd">                                    audience for resource API.</span>
+<span class="sd">    :param headers: dict            All provided headers (including Authorization) in a dict</span>
+<span class="sd">    :param options: dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its</span>
+<span class="sd">                                    audience name.</span>
 
 <span class="sd">    :return: PebbleAuthToken</span>
 <span class="sd">    &quot;&quot;&quot;</span>

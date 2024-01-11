@@ -208,8 +208,8 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>token</strong> – str               Incoming token that must be verified</p></li>
-<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
-audience for resource API.</p></li>
+<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its
+audience name.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -230,9 +230,9 @@ audience for resource API.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>headers</strong> – dict             All provided headers (including Authorization) in a dict</p></li>
-<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. It is suggested to control
-audience for resource API.</p></li>
+<li><p><strong>headers</strong> – dict            All provided headers (including Authorization) in a dict</p></li>
+<li><p><strong>options</strong> – dict            Verifying options. Acceptable claims : audience, issuer. Resource API MUST control its
+audience name.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
