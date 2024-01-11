@@ -1,6 +1,8 @@
 import jwt
 import json
 
+from datetime import datetime, timezone
+
 from pebbleauthclient.errors import NotFoundJWKError, NoAlgorithmProvidedError, EmptyTokenError, KidNotProvidedException
 from pebbleauthclient.key import get_jwk_set, get_jwk_by_id, reset_jwk_set
 from pebbleauthclient.models import PebbleAuthToken
@@ -45,7 +47,7 @@ def auth(token: str, options: dict = None) -> PebbleAuthToken:
     claims = ['audience', 'issuer']
 
     for claim in claims:
-        options[claim] = options[claim] if options[claim] else None
+        options[claim] = options[claim] if claim in options else None
 
     verif_aud = True if options['audience'] else False
     verif_iss = True if options['issuer'] else False

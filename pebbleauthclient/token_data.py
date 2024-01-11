@@ -38,7 +38,7 @@ def get_token_data_from_jwt_payload(jwt_payload: dict, token: str) -> PebbleToke
     :return: PebbleTokenData
     """
 
-    claims = ('aud', 'iss', 'tid', 'sub', 'roles', 'lv', 'name', 'iat', 'exp')
+    claims = ('aud', 'iss', 'tid', 'sub', 'roles', 'lv', 'name', 'iat', 'exp', 'scope', 'jti', 'client_id')
 
     for claim in claims:
         if claim not in jwt_payload:
@@ -54,5 +54,8 @@ def get_token_data_from_jwt_payload(jwt_payload: dict, token: str) -> PebbleToke
         name=jwt_payload['name'],
         iat=jwt_payload['iat'],
         exp=jwt_payload['exp'],
+        scope=jwt_payload['scope'],
+        jti=jwt_payload['jti'],
+        client_id=jwt_payload['client_id'],
         token=token
     )
