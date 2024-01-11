@@ -198,6 +198,8 @@
 <span></span><span class="kn">import</span> <span class="nn">jwt</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
 <span class="kn">from</span> <span class="nn">pebbleauthclient.errors</span> <span class="kn">import</span> <span class="n">NotFoundJWKError</span><span class="p">,</span> <span class="n">NoAlgorithmProvidedError</span><span class="p">,</span> <span class="n">EmptyTokenError</span><span class="p">,</span> <span class="n">KidNotProvidedException</span>
 <span class="kn">from</span> <span class="nn">pebbleauthclient.key</span> <span class="kn">import</span> <span class="n">get_jwk_set</span><span class="p">,</span> <span class="n">get_jwk_by_id</span><span class="p">,</span> <span class="n">reset_jwk_set</span>
 <span class="kn">from</span> <span class="nn">pebbleauthclient.models</span> <span class="kn">import</span> <span class="n">PebbleAuthToken</span>
@@ -244,7 +246,7 @@
     <span class="n">claims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;audience&#39;</span><span class="p">,</span> <span class="s1">&#39;issuer&#39;</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">claim</span> <span class="ow">in</span> <span class="n">claims</span><span class="p">:</span>
-        <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">claim</span><span class="p">]</span> <span class="k">if</span> <span class="n">claim</span> <span class="ow">in</span> <span class="n">options</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="n">verif_aud</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;audience&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>
     <span class="n">verif_iss</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;issuer&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">False</span>

@@ -240,7 +240,7 @@
 <span class="sd">    :return: PebbleTokenData</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">claims</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;aud&#39;</span><span class="p">,</span> <span class="s1">&#39;iss&#39;</span><span class="p">,</span> <span class="s1">&#39;tid&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">,</span> <span class="s1">&#39;roles&#39;</span><span class="p">,</span> <span class="s1">&#39;lv&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;iat&#39;</span><span class="p">,</span> <span class="s1">&#39;exp&#39;</span><span class="p">)</span>
+    <span class="n">claims</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;aud&#39;</span><span class="p">,</span> <span class="s1">&#39;iss&#39;</span><span class="p">,</span> <span class="s1">&#39;tid&#39;</span><span class="p">,</span> <span class="s1">&#39;sub&#39;</span><span class="p">,</span> <span class="s1">&#39;roles&#39;</span><span class="p">,</span> <span class="s1">&#39;lv&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;iat&#39;</span><span class="p">,</span> <span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;scope&#39;</span><span class="p">,</span> <span class="s1">&#39;jti&#39;</span><span class="p">,</span> <span class="s1">&#39;client_id&#39;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">claim</span> <span class="ow">in</span> <span class="n">claims</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">claim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">jwt_payload</span><span class="p">:</span>
@@ -256,6 +256,9 @@
         <span class="n">name</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
         <span class="n">iat</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;iat&#39;</span><span class="p">],</span>
         <span class="n">exp</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">],</span>
+        <span class="n">scope</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;scope&#39;</span><span class="p">],</span>
+        <span class="n">jti</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;jti&#39;</span><span class="p">],</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="n">jwt_payload</span><span class="p">[</span><span class="s1">&#39;client_id&#39;</span><span class="p">],</span>
         <span class="n">token</span><span class="o">=</span><span class="n">token</span>
     <span class="p">)</span></div>
 
