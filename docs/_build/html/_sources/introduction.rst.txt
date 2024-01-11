@@ -26,10 +26,9 @@ Solution 1 : requirement.txt configuration
 If your project use a requirement.txt configuration file, simply add the
 following.
 
-.. code-block::
-   :caption: requirement.txt file addition
+requirement.txt file addition::
 
-    pebbleauthclient>=0.1.5
+    pebbleauthclient>=0.2.0
 
 Then run this command on your project :
 
@@ -39,8 +38,7 @@ Then run this command on your project :
 
 Or in Dockerfile :
 
-.. code-block::
-   :caption: Dockerfile addition
+.. code:: Dockerfile
 
     RUN pip install -r requirements.txt
 
@@ -56,8 +54,7 @@ then run the following in the application directory.
 
 Or in Dockerfile :
 
-.. code-block::
-   :caption: Dockerfile addition
+.. code:: Dockerfile
 
     RUN pip install pebbleauthclient
 
@@ -88,8 +85,7 @@ your terminal before starting your server :**
 **If you start your server within a Docker container, you should add this
 line to your Dockefile :**
 
-.. code-block::
-   :caption: Dockerfile
+.. code:: Dockerfile
 
     ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 
@@ -113,8 +109,7 @@ https://storage.googleapis.com/pebble-public-cdn/test_auth/private_test.pem
 Authenticate with token string
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block::
-   :caption: python source
+.. code:: python
 
     from pebbleauthclient.auth import auth
 
@@ -136,8 +131,7 @@ Authenticate with HTTP Authorization header
     header. The important thing is to communicate a dict to ``auth_from_http_headers()``
     function with a valid Authorization key value.
 
-.. code-block::
-    :caption: python source
+.. code:: python
 
     from http.server import HTTPServer, BaseHTTPRequestHandler
     from pebbleauthclient.auth import auth_from_http_headers
@@ -169,3 +163,32 @@ Authenticate with HTTP Authorization header
     print("Server is waiting...")
     server.serve_forever()
     server.server_close()
+
+Check the audience
+~~~~~~~~~~~~~~~~~~
+
+Audience identifies the recipients that the token is intended for. Each resource
+server MUST be identified by its audience name and the authorization process MUST
+check that this audience exists in the token.
+
+.. warning::
+    By default, audience is not checked by the authentication process. It is
+    the responsibility of the resource server to communicate its audience name
+    in order to only accept token that has been generated for the this specific
+    resource server.
+
+To check the audience, add an ``options`` dictionary to the ``auth()`` or
+``auth_from_http_headers()`` functions.
+
+.. code:: python
+
+    # Check that the provided token has a valid audience for api.pebble.solutions/v5/my-resource
+    auth_token = auth("----my.valid.token----", options={
+        'audience': "api.pebble.solutions/v5/my-resource"
+    })
+
+    # Check that token communicate through authorization header has a valid audience
+    # for api.pebble.solutions/v5/my-resource
+    auth_token = auth_from_http_headers(headers, options={
+        'audience': "api.pebble.solutions/v5/my-resource"
+    })
