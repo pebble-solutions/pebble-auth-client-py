@@ -75,4 +75,4 @@ class User(UserObject):
 
                     count +=1
 
-            return count >= len(scopes)
+        return count >= len(scopes)

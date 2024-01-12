@@ -26,4 +26,4 @@ print(auth_token)
 print(user)
 print(licence)
 
-print(user.has_scopes(['project:write.own']))
+print(user.has_scopes(['project:list', 'project:read']))
