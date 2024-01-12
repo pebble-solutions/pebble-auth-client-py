@@ -68,8 +68,8 @@ Usage
 Configuration
 ~~~~~~~~~~~~~
 
-Before you can work with the library, you must define to a system environment
-variable the URI were is stored the public Json Web Key Set (JWKS file).
+Before you can work with the library, you must define a system environment
+variable with the URI of the public Json Web Key Set (remote JWKS file).
 
 This file will be requested and store **temporary** on your API Server.
 Your server should be able to write on *./var/credentials/auth/jwks.json* .
@@ -88,6 +88,27 @@ line to your Dockefile :**
 .. code:: Dockerfile
 
     ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
+
+**Other configurations**
+
+You can add more configuration by defining some more environment variables on your
+system. These configurations have values by default that works for most of the cases.
+
+.. list-table::
+    :header-rows: 1
+
+    * - Environment variable
+      - Default
+      - Description
+    * - ``PBL_JWKS_REMOTE_URI``
+      - *Unset*
+      - **MANDATORY** URI of the remote jwks.json file. This file contains all active public keys to decode token.
+    * - ``PBL_CERTS_FOLDER``
+      - ./var/credentials/auth
+      - Local folder for temporary store authentication credentials. Storing locally the credentials improves server response.
+    * - ``PBL_JWKS_EXP_TIME``
+      - 86400
+      - Duration in seconds after which Keys Set (JWKS) is considered as expired. All local copy of the keys must be destroyed and the remote server will be requested to create the new copy.
 
 Test keys pair
 ~~~~~~~~~~~~~~

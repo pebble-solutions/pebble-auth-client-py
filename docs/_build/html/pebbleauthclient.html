@@ -250,7 +250,11 @@ audience name.</p></li>
 <dt class="sig sig-object py" id="pebbleauthclient.constants.CERTS_FOLDER">
 <span class="sig-prename descclassname"><span class="pre">pebbleauthclient.constants.</span></span><span class="sig-name descname"><span class="pre">CERTS_FOLDER</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'./var/credentials/auth'</span></em><a class="headerlink" href="#pebbleauthclient.constants.CERTS_FOLDER" title="Link to this definition">#</a></dt>
 <dd><p>Contains the local folder for temporary store authentication credentials. Storing locally the credentials improves
-server response.</p>
+server response. Default value : ./var/credentials/auth. This can be changed by exporting <cite>PBL_CERTS_FOLDER</cite> environment 
+variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PBL_CERTS_FOLDER</span><span class="o">=./</span><span class="n">var</span><span class="o">/</span><span class="n">credentials</span><span class="o">/</span><span class="n">auth</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py data">
