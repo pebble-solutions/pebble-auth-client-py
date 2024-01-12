@@ -6,10 +6,17 @@ Return the location of remote pebble authenticator public keys set (JWKS) as def
 environment variables
 """
 
-CERTS_FOLDER: str = "./var/credentials/auth"
+env_certs = os.getenv('PBL_CERTS_FOLDER')
+
+CERTS_FOLDER: str = env_certs if env_certs else "./var/credentials/auth"
 """
 Contains the local folder for temporary store authentication credentials. Storing locally the credentials improves
-server response.
+server response. Default value : ./var/credentials/auth. This can be changed by exporting `PBL_CERTS_FOLDER` environment 
+variable.
+
+::
+
+    export PBL_CERTS_FOLDER=./var/credentials/auth
 """
 
 JWKS_LOCAL_PATH: str = CERTS_FOLDER + "/jwks.json"
